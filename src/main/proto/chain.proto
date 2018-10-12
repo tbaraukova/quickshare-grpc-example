@@ -1,0 +1,21 @@
+
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "by.epam.quickshare.sample.grpc";
+
+service ChainBuilder {
+    rpc BuildChain (stream Link) returns (Chain);
+    rpc RemoveLink (Link) returns (Chain);
+    rpc BreakChain (Chain) returns (stream Link);
+    rpc BreakChains (stream Chain) returns (stream Link);
+}
+
+message Link {
+    int32 id = 1;
+}
+
+message Chain {
+    repeated Link links = 1;
+}
